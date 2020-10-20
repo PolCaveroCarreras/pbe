@@ -21,7 +21,7 @@ class Rfid
 end
  
 if _FILE_ == $0 
-  puts “Sisplau escaneja la teva targeta:”
+  puts “Sisplau escaneja la teva targeta”
   rf = Rfid.new 
   uid = rf.read_uid 
   puts uid 
