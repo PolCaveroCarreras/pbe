@@ -14,7 +14,7 @@ class Rfid
 end
 
 class Puzle2 < Gtk::Window
-def initialize
+	def initialize
 		super
 		set_title "Puzle 2"
 		signal_connect "destroy" do Gtk.main_quit end
@@ -38,17 +38,17 @@ def initialize
 		@label.set_size_request 640,250
 		@grid.attach @label,0,0,2,1
 		show_all
-
-		def set_text(string)
+	end
+	def set_text(string)
 			@css_provider.load data: "label {background-color: red;} \ label{color: white;} \ label {border-radius: Opx;}"
 			@label.style_context.add_provider (css_provider,Gtk::StyleProvider::PRIORITY_USER)
 			@label.set_label "UID: #{string}"
 		return false
-		end
+	end
 	
-		def auxiliar(string)
+	def auxiliar(string)
 		Glib::Idle.add{set_text(string)}
-		end
+	end
 end
 
 
