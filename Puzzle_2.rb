@@ -28,10 +28,10 @@ def initialize
 			@label.style_context.add_provider(@css_provider, Gtk::StyleProvider::PRIORITY_USER)
 			@label.set_label "Please, log in with your university card"
 		end
-button.set_size_request 640,50
-@grid.attach button,0,1,1,1
-@label = Gtk::label.new
-@label.set_label "Please, log in with your university card"
+		button.set_size_request 640,50
+		@grid.attach button,0,1,1,1
+		@label = Gtk::label.new
+		@label.set_label "Please, log in with your university card"
 		@css_provider = Gtk::CssProvider.new
 		@css_provider.load data: "label {background-color: blue;} \ label{color: white;} \ label {border-radius: Opx;}"
 		@label.style_context.add_provider @css_provider,Gtk::StyleProvider::PRIORITY_USER
@@ -39,24 +39,25 @@ button.set_size_request 640,50
 		@grid.attach @label,0,0,2,1
 		show_all
 
-def set_text(string)
-		@css_provider.load data: "label {background-color: red;} \ label{color: white;} \ label {border-radius: Opx;}"
-		@label.style_context.add_provider (css_provider,Gtk::StyleProvider::PRIORITY_USER)
-		@label.set_label "UID: #{string}"
+		def set_text(string)
+			@css_provider.load data: "label {background-color: red;} \ label{color: white;} \ label {border-radius: Opx;}"
+			@label.style_context.add_provider (css_provider,Gtk::StyleProvider::PRIORITY_USER)
+			@label.set_label "UID: #{string}"
 		return false
-end
+		end
 	
-	def auxiliar(string)
+		def auxiliar(string)
 		Glib::Idle.add{set_text(string)}
-	end
+		end
 end
 
 
-
-window = Puzzle2.new
-rf = Rfid.new
-t = Thread.new{ while(1) do
-			window.auxiliar(rf.read_uid())
-			sleep 2
-		end}
-Gtk.main
+if __FILE__ == $0
+	window = Puzzle2.new
+	rf = Rfid.new
+	t = Thread.new{ while(1) do
+		window.auxiliar(rf.read_uid())
+		sleep 2
+	end}
+	Gtk.main
+end
